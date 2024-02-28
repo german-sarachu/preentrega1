@@ -37,7 +37,6 @@ while (continuar) {
 
 ////////////////////////////////////////////////////////////////////////
 
-//clase Divisa para representar cada moneda
 class Divisa {
   constructor(icono, designacion, valorCompra, valorVenta) {
     this.icono = icono;
@@ -47,7 +46,7 @@ class Divisa {
   }
 }
 
-//arreglo objetos Divisa
+//arreglo de objetos Divisa
 const divisas = [
   new Divisa("PesoUrug", "Peso Uruguayo", 1, 1),
   new Divisa("EEUU", "Dolar", 37.85, 40.35),
@@ -56,87 +55,101 @@ const divisas = [
   new Divisa("Real", "Real", 7.5, 9.2),
 ];
 
-//opciones de monedas disponibles
-let opciones = divisas.map((divisa) => divisa.designacion).join(", ");
-let monedaOrigen = prompt("Elige la moneda que tienes entre: " + opciones);
-let monedaDestino = prompt(
-  "Elige la moneda a la que quieres cambiar entre: " + opciones
-);
-
-//cantidad a convertir
-let cantidad = parseFloat(prompt("Ingresa la cantidad a convertir:"));
+const monederoResultados = [];
 
 //calcular la conversión entre dos monedas
 function calcularConversionCompra(cantidad, monedaOrigen, monedaDestino) {
   const divisaOrigen = divisas.find(
-    (divisa) => divisa.designacion.toLowerCase() == monedaOrigen.toLowerCase()
+    (divisa) => divisa.designacion.toLowerCase() === monedaOrigen.toLowerCase()
   );
   const divisaDestino = divisas.find(
-    (divisa) => divisa.designacion.toLowerCase() == monedaDestino.toLowerCase()
+    (divisa) => divisa.designacion.toLowerCase() === monedaDestino.toLowerCase()
   );
 
-  //si alguna moneda está mal escrita o son la misma para convertir
-  if (!divisaOrigen || !divisaDestino || divisaOrigen == divisaDestino) {
+  //si está mal escrita o son la misma para convertir
+  if (!divisaOrigen || !divisaDestino || divisaOrigen === divisaDestino) {
     return "Una de las monedas no es válida";
   }
 
   //conversión
   let resultado =
     cantidad * (divisaOrigen.valorCompra / divisaDestino.valorVenta);
+
+  monederoResultados.push(resultado);
+
   return resultado;
 }
 
-//mostrar el resultado
-let conversion = calcularConversionCompra(
-  cantidad,
-  monedaOrigen,
-  monedaDestino
-);
-alert("El resultado de la conversión es: " + conversion);
+//permitir múltiples conversiones
+let seguir = prompt("Siga las instrucciones. Presione x para salir");
+while (seguir != "x") {
+  //monedas disponibles
+  let opciones = divisas.map((divisa) => divisa.designacion).join(", ");
+  let monedaOrigen = prompt("Elige la moneda que tienes entre: " + opciones);
+  let monedaDestino = prompt(
+    "Elige la moneda a la que quieres cambiar entre: " + opciones
+  );
+
+  //cantidad a convertir
+  let cantidad = parseFloat(prompt("Ingresa la cantidad a convertir:"));
+
+  //calcular y mostrar el resultado de la conversión
+  let conversion = calcularConversionCompra(
+    cantidad,
+    monedaOrigen,
+    monedaDestino
+  );
+  alert("El resultado de la conversión es: " + conversion);
+
+  //preguntar al usuario si desea continuar
+  seguir = prompt("¿Deseas realizar otra conversión? Presione x para salir");
+}
+
+/*const totalCarrito = monederoResultados.reduce((acc, importe) => acc + importe, 0);
+console.log("Total del carrito:", totalCarrito);*/
 
 ///////////////////////////////////////////////////////////////////////////
 
 //número aleatorio entre min y max
 function generarNumeroAleatorio(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function debeHacerSorteo() {
-  //fecha y hora actual
-  const ahora = new Date();
-
-  //última vez que se generó un número aleatorio
-  let ultimaGeneracion = localStorage.getItem("ultimaGeneracion");
-  if (ultimaGeneracion) {
-    ultimaGeneracion = new Date(ultimaGeneracion);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-  //si pasaron 2 horas desde ultimo de número aleatorio
-  return !ultimaGeneracion || ahora - ultimaGeneracion >= 2 * 60 * 60 * 1000;
-}
-
-//realizar el sorteo y otorgar premio al usuario
-function realizarSorteo() {
-  const numeroPagina = generarNumeroAleatorio(1, 100);
-  const numeroUsuario = parseInt(prompt("Ingresa un número del 1 al 100:"));
-  const ganaPremio = numeroUsuario == numeroPagina;
-
-  if (ganaPremio) {
-    alert("¡Felicidades! Has ganado un premio.");
-    alert("Lo siento. Ha ocurrido un error!!");
+  
+  function debeHacerSorteo() {
+    //fecha y hora actual
+    const ahora = new Date();
+  
+    //última vez que se generó un número aleatorio
+    let ultimaGeneracion = localStorage.getItem("ultimaGeneracion");
+    if (ultimaGeneracion) {
+      ultimaGeneracion = new Date(ultimaGeneracion);
+    }
+  
+    //si pasaron 2 horas desde ultimo de número aleatorio
+    return !ultimaGeneracion || ahora - ultimaGeneracion >= 2 * 60 * 60 * 1000;
+  }
+  
+  //realizar el sorteo y otorgar premio al usuario
+  function realizarSorteo() {
+    const numeroPagina = generarNumeroAleatorio(1, 100);
+    const numeroUsuario = parseInt(prompt("Ingresa un número del 1 al 100:"));
+    const ganaPremio = numeroUsuario == numeroPagina;
+  
+    if (ganaPremio) {
+      alert("¡Felicidades! Has ganado un premio.");
+    } else {
+      alert("Lo siento, no has ganado un premio.");
+    }
+  
+    //fecha y hora actual, última vez que se generó un número aleatorio
+    localStorage.setItem("ultimaGeneracion", new Date());
+  }
+  
+  //sorteo
+  if (debeHacerSorteo()) {
+    realizarSorteo();
   } else {
-    alert("Lo siento, no has ganado un premio.");
+    alert(
+      "Ya has jugado el sorteo en las últimas 2 horas. Vuelve a intentarlo más tarde."
+    );
   }
-
-  //fecha y hora actual, última vez que se generó un número aleatorio
-  localStorage.setItem("ultimaGeneracion", new Date());
-}
-
-//sorteo
-if (debeHacerSorteo()) {
-  realizarSorteo();
-} else {
-  alert(
-    "Ya has jugado el sorteo en las últimas 2 horas. Vuelve a intentarlo más tarde."
-  );
-}
