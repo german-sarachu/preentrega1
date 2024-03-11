@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundo Cripto</title>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css"
+/>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <h1 class="title-cripto">Mundo Cripto</h1>
+  </header>
+
+  <main>
+    <div id="contenedorGeneralCripto">
+      <div class="cripto-contenedor-cards" id="criptoContenedor">
+        <!-- Criptomonedas dinamicas -->
+      </div>
+    </div>
+  </main>
+
+  <div class="contenedor-comoprarCripto">
+    <form class="formularioCripto" action="">
+      <h2 class="registrarseTitle">Realiza tu compra de criptomonedas aquí</h2>
+      <div class="registrarse">
+        <label>
+          <i class="fa-solid fa-user"></i>
+          <input class="inputRegistrar inputRegistrar2" placeholder="Nombre cripto" type="text" id="criptoMonedaCompra">
+        </label>
+        <label>
+          <i class="fa-solid fa-lock"></i>
+          <input class="inputRegistrar inputRegistrar2" placeholder="Cantidad" type="number" min="0" id="cantidadCripto">
+        </label>
+        <button id="confirmarCompraCripto">Aceptar</button>
+      </div>
+      <p class="totalCripto" id="totalCripto"></p>
+    </form>
+  </div>
+
+  <div id="carrito">
+    <table class="carrito-table" id="carritoTable">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio unitario</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="carritoBody"></tbody>
+    </table>
+    <button id="vaciarCarrito">Vaciar Carrito</button>
+    <button id="confirmarCompra" class="btn-primary">Confirmar Compra</button>
+  </div>
+
+  <p class="cripto-link" id="cripto">
+    <a href="../index.html">Volver</a>
+  </p>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
+  <script src="../scripts/cripto.js"></script>
+</body>
+</html>

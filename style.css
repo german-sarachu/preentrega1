@@ -1,0 +1,544 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/*/////////////////////////////////*/
+.soloRegistro {
+  width: 100%;
+  margin: 0 auto 20px auto;
+}
+.registrarse {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-items: baseline;
+  gap: 20px;
+}
+.registrarseTitle {
+  margin-top: 20px;
+}
+
+.formularioRegistrar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+  text-align: center;
+  padding: 15px 20px;
+  box-shadow: 0 5px 10px rgba(71, 3, 6, 0.7);
+}
+@media (max-width: 780px) {
+  .registrarse {
+    flex-direction: column;
+    align-items: center;
+  }
+  .formularioRegistrar {
+    align-items: center;
+  }
+}
+
+.formularioRegistrar .title {
+  color: #252525;
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.formularioRegistrar label {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.formularioRegistrar label .fa-solid {
+  font-size: 20px;
+  color: #cb232c;
+  margin-right: 10px;
+}
+
+.inputRegistrar {
+  outline: none;
+  border: none;
+  color: #252525;
+  border-bottom: solid 1px #ce1d61;
+  padding: 0 5px;
+  font-size: 18px;
+}
+
+.inputRegistrar::placeholder {
+  color: rgba(37, 37, 37, 0.5);
+}
+
+.formularioRegistrar .link {
+  color: #252525;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.formularioRegistrar button {
+  color: #fff;
+  border: none;
+  background: linear-gradient(to right, #cb232c, #ce1d61);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*/////////////////////////////////*/
+
+body {
+  font-family: "Roboto", sans-serif;
+  min-height: 792px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.wrapper {
+  background-color: #fff;
+  border-radius: 0.4rem;
+  position: relative;
+  min-height: 692px;
+  width: 100%;
+}
+.blue-bg {
+  position: absolute;
+  background-color: #0a146e;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 396px;
+}
+.white-bg {
+  position: absolute;
+  background-color: #fff;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 296px;
+}
+.converter-wrapper {
+  min-width: 900px;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 4rem 3rem;
+  -webkit-box-shadow: 0 6px 6px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 6px -1px rgba(0, 0, 0, 0.2);
+}
+.converter-wrapper h2 {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.converter-inputs {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr;
+  -webkit-column-gap: 3rem;
+  -moz-column-gap: 3rem;
+  column-gap: 3rem;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.converter-inputs > div {
+  margin-bottom: 2rem;
+}
+.converter-inputs label {
+  color: #5d7079;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.converter-inputs input,
+.converter-inputs select {
+  border: 1px solid #c6c7c9;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.8rem;
+  outline: 0;
+  width: 100%;
+}
+.icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 0 !important;
+}
+.icon img {
+  width: 40px;
+}
+.icon button {
+  background-color: transparent;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.icon button:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.result-wrapper {
+  font-size: 1.4rem;
+}
+#from-result {
+  color: #0a146e;
+  font-weight: bold;
+}
+#to-result {
+  color: #2ed06e;
+  font-weight: bold;
+}
+#convert-btn {
+  background-color: #0a146e;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.4rem;
+  margin-top: 1.6rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .converter-wrapper h2 {
+    font-size: 2rem;
+    top: -100px;
+  }
+  .converter-inputs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .converter-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    min-width: 400px;
+  }
+  .result-wrapper {
+    font-size: 1.2rem;
+  }
+  #convert-btn {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .converter-wrapper {
+    min-width: 325px;
+  }
+}
+
+/* //////////////////////////// */
+
+.sorteo-wrapper {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  max-width: 400px;
+  border: 3px solid #c6c7c9;
+  border-radius: 4px;
+}
+
+.container {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container p {
+  margin-bottom: 10px;
+}
+
+.container input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.container input::-webkit-inner-spin-button,
+.container input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #0a146e;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.numero-favorecido {
+  font-weight: 800;
+  font-size: 3rem;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+#numeroFavorecido {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+/* ////////////////////////////////////// */
+
+/* Estilos para el botón de cripto */
+.cripto-link {
+  position: fixed;
+  bottom: 13px;
+  left: 83%;
+  transform: translateX(-30%);
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  background-color: #ce1d61;
+  padding: 10px 12px;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  animation: fadeInOut 5s ease-in-out infinite;
+  text-align: center;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .cripto-link {
+    font-size: 18px;
+  }
+}
+.cripto-link a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Estilos para las tarjetas de criptomonedas */
+
+.title-cripto {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  background-color: #ce1d61;
+  padding: 10px 12px;
+  margin-bottom: 35px;
+  font-size: 34px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  color: #fff;
+}
+
+#contenedorGeneralCripto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  padding: 20px;
+}
+
+.cripto-contenedor-cards {
+  display: flex;
+  flex-wrap: wrap; /* Agregamos wrap para que las cards se ajusten correctamente */
+  justify-content: space-around; /* Ajustamos el espaciado entre las cards */
+}
+
+.cripto-contenedor-card {
+  flex: 0 0 calc(25% - 20px); /* Tamaño de la tarjeta con espacio entre ellas */
+  margin-bottom: 20px;
+  margin-right: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  max-width: 300px; /* Máximo ancho de la tarjeta */
+  text-align: center; /* Centrar contenido */
+}
+
+.cripto-imagen {
+  padding: 20px; /* Agregamos un padding para centrar la imagen */
+}
+
+.cripto-imagen img {
+  width: 100%; /* Ajustamos la anchura de la imagen al 100% para que se ajuste al contenedor */
+  max-height: 80px;
+  display: block;
+  margin: 0 auto; /* Centramos la imagen horizontalmente */
+}
+
+.cripto-info {
+  padding: 10px;
+}
+
+.cripto-nombre {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.cripto-precio {
+  margin: 10px 0;
+  font-size: 30px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 1200px) {
+  .cripto-contenedor-card {
+    flex: 0 0 calc(33.33% - 20px); /* Cambiar el tamaño a 33.33% en pantallas más pequeñas */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cripto-contenedor-card {
+    flex: 0 0 calc(50% - 20px); /* Cambiar el tamaño a 50% en pantallas más pequeñas */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cripto-contenedor-card {
+    flex: 0 0 calc(100% - 20px); /* Cambiar el tamaño a 100% en pantallas aún más pequeñas */
+  }
+}
+
+.registrarseTitle {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.inputRegistrar2 {
+  color: #252525;
+  border: solid 1px #ce1d61;
+  border-radius: 10px;
+  height: 50px;
+}
+
+#confirmarCompraCripto {
+  background-color: #0a146e;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.4rem;
+  margin-top: 1.6rem;
+  cursor: pointer;
+}
+
+.totalCripto {
+  margin: 15px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+#carrito {
+  margin-top: 25px;
+}
+
+tr {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 10px 15px;
+}
+@media (max-width: 540px) {
+  th,
+  td {
+    padding: 5px 7px;
+  }
+}
+
+td button {
+  background-color: red;
+  padding: 4px;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#vaciarCarrito,
+.btn-primary {
+  background-color: #0a146e;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(1, 1, 2, 0.7);
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  margin-top: 1.6rem;
+  margin-right: 15px;
+  margin-bottom: 7px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.btn-primary {
+  background-color: #2ed06e;
+}
