@@ -31,17 +31,11 @@ buttonSwal.addEventListener("click", (e) => { //evento click
       usuariosRegistrados.push(data); //sino, lo guardo en usuariosRegistrados y en localStorage
       guardarEnLS(usuariosRegistrados);
       Swal.fire("Ahora si fiera!! 👌"); //queda guardado en arreglo
-      iniciarJuego(); // Iniciar el juego automáticamente después del registro
       username.value = "";
       password.value = ""; //vacio los campos
     }
   }
 });
-
-function iniciarJuego() {
-  // Coloca aquí el código para iniciar el juego
-  console.log("¡El juego ha comenzado!");
-}
 
 function recuperarLS() {
   return JSON.parse(localStorage.getItem("usuarios")); // Función recuperar del localStorage y devolver como objeto

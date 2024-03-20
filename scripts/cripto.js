@@ -1,4 +1,13 @@
-class CriptoMonedas {
+const criptoMonedaCompra = document.getElementById("criptoMonedaCompra");
+const cantidadCripto = document.getElementById("cantidadCripto");
+const btnConfirmarCompraCripto = document.getElementById("confirmarCompraCripto");
+const totalCripto = document.getElementById("totalCripto");
+const carritoContainer = document.getElementById("carritoBody");
+const btnEliminarCompras = document.getElementById("eliminarCompras");
+const btnVaciarCarrito = document.getElementById("vaciarCarrito");
+const btnConfirmarCompra = document.getElementById("confirmarCompra");
+
+class CriptoMoneda {
   constructor(imagen, nombre, costo) {
     this.imagen = imagen;
     this.nombre = nombre;
@@ -6,79 +15,68 @@ class CriptoMonedas {
   }
 }
 
-const criptos = [
-  new CriptoMonedas("binance.jpg", "binance", 428.18),
-  new CriptoMonedas("bitcoin.jpg", "bitcoin", 39156),
-  new CriptoMonedas("cardano.jpg", "cardano", 1.25),
-  new CriptoMonedas("dodgecoin.jpg", "dodgecoin", 0.19),
-  new CriptoMonedas("ethereum.jpg", "ethereum", 2739),
-  new CriptoMonedas("ripple.jpg", "ripple", 0.84),
-  new CriptoMonedas("tether.jpg", "tether", 1.0),
-  new CriptoMonedas("usdcoin.jpg", "usdcoin", 1.0),
-];
+const criptos = []; // almacenar criptomonedas obtenidas de API
 
-const criptoMonedaCompra = document.getElementById("criptoMonedaCompra");
-const cantidadCripto = document.getElementById("cantidadCripto");
-const btnConfirmarCompraCripto = document.getElementById(
-  "confirmarCompraCripto"
-);
-const totalCripto = document.getElementById("totalCripto");
-const carritoContainer = document.getElementById("carritoBody");
-const btnEliminarCompras = document.getElementById("eliminarCompras");
-const btnVaciarCarrito = document.getElementById("vaciarCarrito");
-const btnConfirmarCompra = document.getElementById("confirmarCompra");
+const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1';
 
-let carrito = [];
+fetch(apiUrl)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error al obtener los datos');
+    }
+    return response.json();
+  })
+  .then(data => {
+    data.forEach(crypto => {
+      const nombre = crypto.name;
+      const precio = crypto.current_price;
+      const logoUrl = crypto.image;
+      const nuevaCripto = new CriptoMoneda(logoUrl, nombre, precio);
+      criptos.push(nuevaCripto);
+      mostrarCripto(nuevaCripto); // Llama a la función para mostrar la criptomoneda
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 
-/*function mostrarCriptos(cripto) {
-    const div = document.createElement("div");
-    div.classList.add("cripto-monedas");
-    div.innerHTML = `
-    <div class="cripto-contenedor-card">
-    <div class="cripto-imagen">
-    <img src="../images/${cripto.imagen}" alt="${cripto.nombre}">
-    </div>
-    <div class="cripto-info">
-    <div class="cripto-nombre-contenedor">
-    <h2 class="cripto-nombre">${cripto.nombre}</h2>
-    </div>
-    <div class="cripto-precio-contenedor">
-    <p class="cripto-precio">$${cripto.costo}</p>
-    </div>
-    </div>
-    </div>
-    `;
-    document.getElementById("criptoContenedor").append(div);
-  }*/
-
-function mostrarCriptos({ nombre, imagen, costo }) {
-  //mostrar cards con destructuring objeto
-  const div = document.createElement("div"); //crea un div
-  div.classList.add("cripto-monedas"); //agrega clase
-  //agregamos html y variables
+function mostrarCripto(cripto) {
+  const {imagen, nombre, costo} = cripto; //destructuring
+  const div = document.createElement("div");
+  div.classList.add("cripto-monedas");
   div.innerHTML = `
     <div class="cripto-contenedor-card">
-    <div class="cripto-imagen">
-    <img src="../images/${imagen}" alt="${nombre}">
+      <div class="cripto-imagen">
+        <img src="${imagen}" alt="${nombre}">
+      </div>
+      <div class="cripto-info">
+        <div class="cripto-nombre-contenedor">
+          <h2 class="cripto-nombre">${nombre}</h2>
+        </div>
+        <div class="cripto-precio-contenedor">
+          <p class="cripto-precio">$${costo}</p>
+        </div>
+      </div>
     </div>
-    <div class="cripto-info">
-    <div class="cripto-nombre-contenedor">
-    <h2 class="cripto-nombre">${nombre}</h2>
-    </div>
-    <div class="cripto-precio-contenedor">
-    <p class="cripto-precio">$${costo}</p>
-    </div>
-    </div>
-    </div>
-    `;
-  document.getElementById("criptoContenedor").append(div); //lo agrega como hijo del div
+  `;
+  document.getElementById("criptoContenedor").appendChild(div);
+
+  // Agregar evento click para capturar el nombre de la moneda
+  div.addEventListener("click", () => {
+    const nombreMonedaSeleccionada = nombre; // Obtener el nombre de la moneda
+    const criptoEncontrada = buscarPorNombre(criptos, nombreMonedaSeleccionada); // Buscar la criptomoneda en la lista
+
+    if (criptoEncontrada) {
+      criptoMonedaCompra.value = criptoEncontrada.nombre; // Asignar el nombre de la moneda al input
+    }
+  });
 }
 
 function buscarPorNombre(arr, filtro) {
-  if (filtro.length > 3) {
-    return arr.find((el) => el.nombre.includes(filtro));
+  if (filtro.length > 0) {
+    return arr.find((el) => el.nombre.toLowerCase() === filtro.toLowerCase());
   } else {
-    return;
+    return null;
   }
 }
 
@@ -109,6 +107,8 @@ btnConfirmarCompraCripto.addEventListener("click", function (e) {
     });
   }
 });
+
+const carrito = []; // Array para almacenar las compras
 
 function calcularCompra(criptoEncontrada, cantidadCriptoElement) {
   const cantidadCripto = parseFloat(cantidadCriptoElement.value); //variable para guardar numero del usuario
@@ -209,12 +209,11 @@ function confirmarCompra() {
   });
 }
 
-criptos.forEach((cripto) => {
-  mostrarCriptos(cripto); //mostrar cards
-});
-
 window.addEventListener("load", () => {
   //carga la pagina con local storage
-  carrito = recuperarCarritoDelLocalStorage();
-  mostrarCarrito();
+  const carritoGuardado = recuperarCarritoDelLocalStorage();
+  if (carritoGuardado.length > 0) {
+    carrito.push(...carritoGuardado);
+    mostrarCarrito();
+  }
 });
